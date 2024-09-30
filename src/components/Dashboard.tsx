@@ -212,46 +212,35 @@ export default function Example(): JSX.Element {
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                         {/* Card Grid */}
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                            {/* Example Card 1 */}
-                            <div className="overflow-hidden rounded-lg bg-white shadow">
-                                <div className="px-4 py-5 sm:p-6">
-                                    <h3 className="text-lg font-medium leading-6 text-gray-900">Card Title 1</h3>
-                                    <div className="mt-2 text-sm text-gray-500">
-                                        This is a brief description of what the card is about.
-                                    </div>
-                                    <button className="mt-4 rounded bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
-                            {/* Example Card 2 */}
-                            <div className="overflow-hidden rounded-lg bg-white shadow">
-                                <div className="px-4 py-5 sm:p-6">
-                                    <h3 className="text-lg font-medium leading-6 text-gray-900">Card Title 2</h3>
-                                    <div className="mt-2 text-sm text-gray-500">
-                                        A different description for the second card.
-                                    </div>
-                                    <button className="mt-4 rounded bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700">
-                                        Explore More
-                                    </button>
-                                </div>
-                            </div>
-                            {/* Example Card 3 */}
-                            <div className="overflow-hidden rounded-lg bg-white shadow">
-                                <div className="px-4 py-5 sm:p-6">
-                                    <h3 className="text-lg font-medium leading-6 text-gray-900">Card Title 3</h3>
-                                    <div className="mt-2 text-sm text-gray-500">
-                                        Some more information about the third card.
-                                    </div>
-                                    <button className="mt-4 rounded bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700">
-                                        Learn More
-                                    </button>
-                                </div>
-                            </div>
+                            {/* Example Cards */}
+                            <Card title="Card Title 1" description="This is a brief description of what the card is about." buttonLabel="View Details" />
+                            <Card title="Card Title 2" description="A different description for the second card." buttonLabel="Explore More" />
+                            <Card title="Card Title 3" description="Some more information about the third card." buttonLabel="Learn More" />
+                            {/* New Cards */}
+                            <Card title="Machine Learning" description="Insights into Machine Learning concepts and projects." buttonLabel="Explore ML" />
+                            <Card title="Data Scientist" description="Tools and techniques for data-driven decision making." buttonLabel="Explore Data" />
+                            <Card title="Python Developer" description="Best practices and projects in Python development." buttonLabel="Learn Python" />
+                            <Card title="Front End Developer" description="Front-end technologies and UI/UX design." buttonLabel="View Projects" />
+                            <Card title="Finance" description="Financial tools, analysis, and market trends." buttonLabel="Explore Finance" />
                         </div>
                     </div>
                 </main>
             </div>
         </>
+    );
+}
+
+// Card component for reusability
+function Card({ title, description, buttonLabel }: { title: string; description: string; buttonLabel: string }) {
+    return (
+        <div className="overflow-hidden rounded-lg bg-white shadow">
+            <div className="px-4 py-5 sm:p-6">
+                <h3 className="text-lg font-medium leading-6 text-gray-900">{title}</h3>
+                <div className="mt-2 text-sm text-gray-500">{description}</div>
+                <button className="mt-4 rounded bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700">
+                    {buttonLabel}
+                </button>
+            </div>
+        </div>
     );
 }
