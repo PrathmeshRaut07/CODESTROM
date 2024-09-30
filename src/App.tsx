@@ -13,7 +13,7 @@ function App() {
                 <Route path="/" element={<Login />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/voicecallmentor" element={<VoiceCallMentor />} /> {/* Properly close this Route */}
+                <Route path="/voicecallmentor" element={<VoiceCallMentor />} />
                 <Route path="/video" element={<Video />} />
             </Routes>
         </Router>
@@ -21,3 +21,4 @@ function App() {
 }
 
 export default App;
+

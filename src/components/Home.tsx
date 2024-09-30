@@ -1,10 +1,13 @@
+
 import {
     Disclosure,
     DisclosureButton,
-} 
-from '@headlessui/react';
+} from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
+
+// Import your background image
+import backgroundImage from './assets/yech2.jpg'; // Replace with your image file name
 
 interface User {
     name: string;
@@ -42,17 +45,27 @@ function classNames(...classes: (string | undefined | false)[]): string {
 
 export default function Home(): JSX.Element {
     const navigate = useNavigate();
-
+    
     return (
-        <div className="min-h-full">
-            <Disclosure as="nav" className="bg-gray-800">
+        <div style={{ 
+            minHeight: '100vh', 
+            backgroundImage: `url(${backgroundImage})`, // Use the imported image
+            backgroundSize: 'cover', 
+            backgroundPosition: 'center', 
+            backgroundRepeat: 'no-repeat',
+            color: '#FFFFFF' // Optional: Set text color for better readability
+        }}>
+            <Disclosure as="nav" style={{ backgroundColor: 'rgba(31, 41, 55, 0.8)' }}>
                 {({ open }) => (
                     <>
-                        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                            <div className="flex h-16 items-center justify-between">
-                                <div className="flex items-center">
-                                    <div className="hidden md:block">
-                                        <div className="ml-10 flex items-baseline space-x-4">
+                        <div style={{ margin: '0 auto', maxWidth: '1200px', padding: '0 1rem' }}>
+                            <div style={{ display: 'flex', height: '4rem', alignItems: 'center', justifyContent: 'space-between' }}>
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <h1 style={{ fontSize: '1.5rem', color: '#FFFFFF', marginRight: '1rem', display: 'none', md: 'block' }}>
+                                        Home Page
+                                    </h1>
+                                    <div style={{ display: 'none', md: 'block' }}>
+                                        <div style={{ marginLeft: '2.5rem', display: 'flex', gap: '1rem' }}>
                                             {navigation.map((item) => (
                                                 <a
                                                     key={item.name}
@@ -64,20 +77,37 @@ export default function Home(): JSX.Element {
                                                         }
                                                     }}
                                                     aria-current={item.current ? 'page' : undefined}
-                                                    className={classNames(
-                                                        item.current
-                                                            ? 'bg-gray-900 text-white'
-                                                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                                        'rounded-md px-3 py-2 text-sm font-medium',
-                                                    )}
+                                                    style={{
+                                                        borderRadius: '0.375rem',
+                                                        padding: '0.5rem 0.75rem',
+                                                        fontSize: '0.875rem',
+                                                        fontWeight: '500',
+                                                        color: item.current ? '#fff' : '#D1D5DB',
+                                                        backgroundColor: item.current ? '#1F2937' : 'transparent',
+                                                        transition: 'all 0.3s ease-in-out',
+                                                        textDecoration: 'none',
+                                                    }}
+                                                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#374151'; e.currentTarget.style.color = '#fff'; }}
+                                                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = item.current ? '#1F2937' : 'transparent'; e.currentTarget.style.color = item.current ? '#fff' : '#D1D5DB'; }}
                                                 >
                                                     {item.name}
                                                 </a>
                                             ))}
                                         </div>
                                     </div>
-                                    <div className="-mr-2 flex md:hidden">
-                                        <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                    <div style={{ marginRight: '-0.5rem', display: 'flex', md: 'none' }}>
+                                        <Disclosure.Button style={{
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            borderRadius: '0.375rem',
+                                            backgroundColor: '#1F2937',
+                                            padding: '0.5rem',
+                                            color: '#9CA3AF',
+                                            cursor: 'pointer',
+                                            outline: 'none',
+                                            transition: 'background-color 0.3s ease',
+                                        }}>
                                             <span className="sr-only">Open main menu</span>
                                             {open ? (
                                                 <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -90,8 +120,8 @@ export default function Home(): JSX.Element {
                             </div>
                         </div>
 
-                        <Disclosure.Panel className="md:hidden">
-                            <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+                        <Disclosure.Panel style={{ display: 'block', md: 'none' }}>
+                            <div style={{ padding: '0.5rem 0', marginBottom: '1rem' }}>
                                 {navigation.map((item) => (
                                     <Disclosure.Button
                                         key={item.name}
@@ -104,12 +134,19 @@ export default function Home(): JSX.Element {
                                             }
                                         }}
                                         aria-current={item.current ? 'page' : undefined}
-                                        className={classNames(
-                                            item.current
-                                                ? 'bg-gray-900 text-white'
-                                                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                            'block rounded-md px-3 py-2 text-base font-medium',
-                                        )}
+                                        style={{
+                                            display: 'block',
+                                            borderRadius: '0.375rem',
+                                            padding: '0.5rem 0.75rem',
+                                            fontSize: '1rem',
+                                            fontWeight: '500',
+                                            color: item.current ? '#fff' : '#D1D5DB',
+                                            backgroundColor: item.current ? '#1F2937' : 'transparent',
+                                            transition: 'all 0.3s ease-in-out',
+                                            textDecoration: 'none',
+                                        }}
+                                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#374151'; e.currentTarget.style.color = '#fff'; }}
+                                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = item.current ? '#1F2937' : 'transparent'; e.currentTarget.style.color = item.current ? '#fff' : '#D1D5DB'; }}
                                     >
                                         {item.name}
                                     </Disclosure.Button>
@@ -120,14 +157,17 @@ export default function Home(): JSX.Element {
                 )}
             </Disclosure>
 
-            <header className="bg-white shadow">
-                <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <h1 className="text-3xl font-bold tracking-tight text-gray-900">Home Page</h1>
+            <header style={{ backgroundColor: 'rgba(255, 255, 255, 0)', boxShadow: 'none' }}>
+                <div style={{ margin: '0 auto', maxWidth: '1200px', padding: '1.5rem 1rem' }}>
+                    <h1 style={{ fontSize: '1.875rem', fontWeight: '700', color: '#FFFFFF', textShadow: '1px 1px 2px rgba(0, 0, 0, 0.7)' }}>
+                        Home Page
+                    </h1>
                 </div>
             </header>
+
             <main>
-                <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div style={{ margin: '0 auto', maxWidth: '1200px', padding: '1.5rem 1rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem' }}>
                         <Card title="Voice Call" description="Insights into Machine Learning concepts and projects." buttonLabel="Explore ML" onButtonClick={() => navigate('/dashboard')} />
                         <Card title="Find Places" description="Tools and techniques for data-driven decision making." buttonLabel="Explore Data" />
                         <Card title="Aptitude" description="Best practices and projects in Python development." buttonLabel="Learn Python" />
@@ -141,12 +181,33 @@ export default function Home(): JSX.Element {
 
 function Card({ title, description, buttonLabel, onButtonClick }: { title: string; description: string; buttonLabel: string; onButtonClick?: () => void }) {
     return (
-        <div className="overflow-hidden rounded-lg bg-white shadow">
-            <div className="px-4 py-5 sm:p-6">
-                <h3 className="text-lg font-medium leading-6 text-gray-900">{title}</h3>
-                <div className="mt-2 text-sm text-gray-500">{description}</div>
+        <div
+            style={{
+                overflow: 'hidden',
+                borderRadius: '0.5rem',
+                backgroundColor: '#FFFFFF',
+                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+                transition: 'transform 0.3s',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
+        >
+            <div style={{ padding: '1.5rem' }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: '500', color: '#111827' }}>{title}</h3>
+                <div style={{ marginTop: '0.5rem', fontSize: '0.875rem', color: '#6B7280' }}>{description}</div>
                 <button
-                    className="mt-4 rounded bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
+                    style={{
+                        marginTop: '1rem',
+                        borderRadius: '0.375rem',
+                        backgroundColor: '#4F46E5',
+                        padding: '0.5rem 1rem',
+                        color: '#FFFFFF',
+                        cursor: 'pointer',
+                        border: 'none',
+                        transition: 'background-color 0.3s, transform 0.2s',
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#4338CA'; e.currentTarget.style.transform = 'scale(1.05)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#4F46E5'; e.currentTarget.style.transform = 'scale(1)'; }}
                     onClick={onButtonClick}
                 >
                     {buttonLabel}

@@ -1,0 +1,47 @@
+/* src/components/Login.css */
+
+.grid-container {
+    display: grid;
+    place-items: center; /* Center items in the grid */
+    min-height: 100vh; /* Full height of the viewport */
+    background: url('./assets/tech.png') no-repeat center center; /* Background image */
+    background-size: cover; /* Cover the entire area */
+    position: relative; /* Set position relative for potential absolute positioning of child elements */
+}
+
+.login-form {
+    background: rgba(255, 255, 255, 0.8); /* Slightly less transparent for better readability */
+    border-radius: 10px;
+    padding: 40px 60px; /* Adjust padding for better spacing */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow for depth */
+    width: 400px; /* Fixed width for the form */
+    max-width: 90%; /* Responsive width on smaller screens */
+}
+
+/* Optional: Add styles for form elements */
+input {
+    width: 100%; /* Full width for input fields */
+    padding: 10px; /* Add padding for comfort */
+    border: 1px solid #ccc; /* Light border for input fields */
+    border-radius: 5px; /* Rounded corners for input fields */
+}
+
+button {
+    background-color: #4f46e5; /* Indigo background color for button */
+    color: white; /* White text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding for button */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+button:hover {
+    background-color: #4338ca; /* Darker shade on hover */
+}
+
+/* Add media queries for responsiveness if needed */
+@media (max-width: 600px) {
+    .login-form {
+        padding: 30px 20px; /* Adjust padding for smaller screens */
+    }
+}

@@ -11,7 +11,7 @@ const profiles = [
     {
         name: 'Dr. Heer Parekh',
         title: 'Data Science Mentor | PhD in AI | Lead Data Scientist at Tech Innovations',
-        image: 'https://via.placeholder.com/150', // Placeholder image
+        image: './assets/20.jpg', // Placeholder image (replace with your image path)
         borderColor: 'border-pink-300',
         github: 'https://github.com',
         linkedin: 'https://linkedin.com',
@@ -21,7 +21,7 @@ const profiles = [
     {
         name: 'Alice Johnson',
         title: 'AI/ML Instructor | AI Researcher at AI Hub',
-        image: 'https://via.placeholder.com/150', // Placeholder image
+        image: 'https://via.placeholder.com/150', // Placeholder image (replace with your image path)
         borderColor: 'border-blue-300',
         github: 'https://github.com',
         linkedin: 'https://linkedin.com',
@@ -31,7 +31,7 @@ const profiles = [
     {
         name: 'Dr. James Smith',
         title: 'Data Science Educator | Machine Learning Engineer at DataWorks',
-        image: 'https://via.placeholder.com/150', // Placeholder image
+        image: 'https://via.placeholder.com/150', // Placeholder image (replace with your image path)
         borderColor: 'border-green-300',
         github: 'https://github.com',
         linkedin: 'https://linkedin.com',
@@ -41,7 +41,7 @@ const profiles = [
     {
         name: 'Prof. Sarah Davis',
         title: 'Computer Science Teacher | AI Ethics Specialist',
-        image: 'https://via.placeholder.com/150', // Placeholder image
+        image: 'https://via.placeholder.com/150', // Placeholder image (replace with your image path)
         borderColor: 'border-purple-300',
         github: 'https://github.com',
         linkedin: 'https://linkedin.com',
@@ -51,7 +51,7 @@ const profiles = [
     {
         name: 'Mark Thompson',
         title: 'Data Analyst | Big Data Consultant',
-        image: 'https://via.placeholder.com/150', // Placeholder image
+        image: 'https://via.placeholder.com/150', // Placeholder image (replace with your image path)
         borderColor: 'border-red-300',
         github: 'https://github.com',
         linkedin: 'https://linkedin.com',
@@ -240,28 +240,28 @@ export default function ProfileCards(): JSX.Element {
                                                 <div className="mt-4 flex justify-center space-x-4">
                                                     <a
                                                         href={profile.github}
-                                                        className="text-gray-500 hover:text-gray-700"
+                                                        className="flex items-center justify-center w-8 h-8 rounded-full border border-gray-300 hover:bg-gray-200"
                                                         aria-label={`Visit ${profile.name}'s GitHub`}
                                                     >
                                                         <FaGithub className="h-5 w-5" />
                                                     </a>
                                                     <a
                                                         href={profile.linkedin}
-                                                        className="text-gray-500 hover:text-gray-700"
+                                                        className="flex items-center justify-center w-8 h-8 rounded-full border border-gray-300 hover:bg-gray-200"
                                                         aria-label={`Visit ${profile.name}'s LinkedIn`}
                                                     >
                                                         <FaLinkedin className="h-5 w-5" />
                                                     </a>
                                                     <a
                                                         href={profile.twitter}
-                                                        className="text-gray-500 hover:text-gray-700"
+                                                        className="flex items-center justify-center w-8 h-8 rounded-full border border-gray-300 hover:bg-gray-200"
                                                         aria-label={`Visit ${profile.name}'s Twitter`}
                                                     >
                                                         <FaTwitter className="h-5 w-5" />
                                                     </a>
                                                     <a
                                                         href={profile.instagram}
-                                                        className="text-gray-500 hover:text-gray-700"
+                                                        className="flex items-center justify-center w-8 h-8 rounded-full border border-gray-300 hover:bg-gray-200"
                                                         aria-label={`Visit ${profile.name}'s Instagram`}
                                                     >
                                                         <FaInstagram className="h-5 w-5" />

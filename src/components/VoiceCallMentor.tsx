@@ -5,7 +5,7 @@ const ProfileCardsMentor = () => {
         {
             name: 'Heer Parekh',
             title: 'Company Secretary | LLB | Assistant Manager: Compliance - Godrej Capital',
-            image: 'path_to_image1.jpg', // Add your image paths here
+            image: '20.jpg', // Add your image paths here
             borderColor: 'border-pink-300'
         },
         {
