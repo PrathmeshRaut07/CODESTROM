@@ -56,7 +56,7 @@ export default function Home(): JSX.Element {
                                 </div>
                                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                                     <div className="flex-shrink-0">
-                                        <h1 className="text-white font-bold text-xl">TechEd</h1>
+                                        <h1 className="text-white font-bold text-xl">EduSaathi</h1>
                                     </div>
                                     <div className="hidden sm:ml-6 sm:block">
                                         <div className="flex space-x-4">

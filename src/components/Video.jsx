@@ -1,6 +1,29 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { MdMic, MdMicOff, MdCallEnd, MdVideocam, MdVideocamOff, MdUploadFile } from 'react-icons/md';
+import {
+    Chart,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+    BarController,
+} from 'chart.js';
+
+// Register required components
+Chart.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+    BarController
+);
+
+
 
 // Check if SpeechRecognition is supported
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -17,6 +40,10 @@ const Video = () => {
     const canvasRef = useRef(null);
     const [webcamActive, setWebcamActive] = useState(false);
     const [frames, setFrames] = useState([]); // Array to store frames
+    const [emotionAnalysis, setEmotionAnalysis] = useState([]); // State to store emotions
+    const [chartInstance, setChartInstance] = useState(null); // State for chart instance
+    const [analysisText, setAnalysisText] = useState(''); // State to store the analysis text
+
 
     useEffect(() => {
         if (SpeechRecognition) {
@@ -51,31 +78,30 @@ const Video = () => {
     }, [isListening, isSpeaking]);
 
     useEffect(() => {
-        console.log('webcamActive changed:', webcamActive); // Debugging
         if (webcamActive && videoRef.current) {
             navigator.mediaDevices.getUserMedia({
                 video: {
                     width: { ideal: 1280 },
                     height: { ideal: 720 },
-                    frameRate: { ideal: 30 }
+                    frameRate: { ideal: 1 }  // Set to 1 fps
                 }
             })
             .then(stream => {
                 videoRef.current.srcObject = stream;
-                captureFrames(); // Start capturing frames
-                console.log('Webcam stream started'); // Debugging
+                videoRef.current.onloadedmetadata = () => {
+                    videoRef.current.play();
+                    captureFrames();
+                };
             })
             .catch(err => {
                 console.error('Error accessing webcam:', err);
             });
-        } else if (!webcamActive && videoRef.current) {
-            // Stop capturing frames when webcam is turned off
+        } else if (!webcamActive && videoRef.current && videoRef.current.srcObject) {
             const stream = videoRef.current.srcObject;
             const tracks = stream.getTracks();
             tracks.forEach(track => track.stop());
         }
     }, [webcamActive]);
-    
 
     const handleFileChange = (event) => {
         setPdfFile(event.target.files[0]);
@@ -184,13 +210,15 @@ const Video = () => {
 
     const handleEndCall = async () => {
         setWebcamActive(false);
-
+    
         try {
             const formData = new FormData();
             formData.append('frames', JSON.stringify(frames));
-
+            console.log('called end call')
             const response = await axios.post('http://localhost:8000/Save_Frames', formData);
+            
             setTranscript('');
+            setEmotionAnalysis(response.data.analysis || []); // Store emotions for plotting
             alert(response.data.message || 'Call ended and frames saved!');
             setShowVoiceUI(false);
             setIsListening(false);
@@ -201,21 +229,67 @@ const Video = () => {
             console.error('Error saving frames:', error);
         }
     };
-
+    
     const captureFrames = () => {
         const interval = setInterval(() => {
-            if (webcamActive && videoRef.current && canvasRef.current) {
+            if (webcamActive && videoRef.current && canvasRef.current && videoRef.current.readyState === 4) {
                 const canvas = canvasRef.current;
                 const context = canvas.getContext('2d');
+                
+                // Ensure canvas dimensions match video dimensions
+                canvas.width = videoRef.current.videoWidth;
+                canvas.height = videoRef.current.videoHeight;
+                
                 context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
                 const frame = canvas.toDataURL('image/png');
-                console.log('frame')
                 setFrames(prevFrames => [...prevFrames, frame]);
             }
-        }, 100 / 30);
+        }, 5000); // Capture every 5 seconds
 
         return () => clearInterval(interval);
     };
+
+    useEffect(() => {
+        if (emotionAnalysis.length > 0) {
+            // Count the occurrences of each emotion
+            const emotionCounts = emotionAnalysis.reduce((acc, emotion) => {
+                acc[emotion] = (acc[emotion] || 0) + 1;
+                return acc;
+            }, {});
+
+            // Prepare data for Chart.js
+            const labels = Object.keys(emotionCounts);
+            const data = Object.values(emotionCounts);
+
+            const chartData = {
+                labels,
+                datasets: [
+                    {
+                        label: 'Emotion Count',
+                        data,
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    },
+                ],
+            };
+
+            // If a chart instance exists, destroy it before creating a new one
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            // Create a new chart instance
+            const newChartInstance = new Chart(document.getElementById('emotionChart'), {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                },
+            });
+
+            setChartInstance(newChartInstance);
+        }
+    }, [emotionAnalysis]);
 
     const toggleWebcam = () => {
         setWebcamActive(!webcamActive);
@@ -286,12 +360,19 @@ const Video = () => {
                             </div>
                         )}
                         {webcamActive && (
-                            <div className="flex justify-center mt-6">
-                                <video ref={videoRef} autoPlay className="rounded-lg shadow-lg" style={{ width: '100%', maxWidth: '500px', border: '2px solid #3b82f6' }} />
-                            </div>
+                            <video ref={videoRef} autoPlay playsInline className="rounded-lg shadow-lg" style={{ width: '100%', maxWidth: '500px', border: '2px solid #3b82f6' }} />
                         )}
+                        <canvas ref={canvasRef} width="1280" height="720" style={{ display: 'none' }} />
                     </div>
                 )}
+
+                {emotionAnalysis.length > 0 && (
+                    <div className="mt-6 bg-gray-800 p-4 rounded-lg shadow-sm">
+                        <h3 className="text-lg font-bold text-gray-300">Emotion Analysis:</h3>
+                        <canvas id="emotionChart" style={{ width: '100%', height: '400px' }}></canvas>
+                    </div>
+                )}
+                
 
                 {loading && (
                     <div className="flex justify-center p-6">
