@@ -173,6 +173,7 @@ const GroupDiscussion: React.FC = () => {
   const [currentSpeaker, setCurrentSpeaker] = useState('');
   const recognitionRef = useRef<any>(null);
   const synthRef = useRef<SpeechSynthesis | null>(null);
+  const [analysis, setAnalysis] = useState('');
 
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -262,38 +263,51 @@ const GroupDiscussion: React.FC = () => {
       console.error('Error starting discussion:', error);
     }
   };
+  const endDiscussion = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/end_discussion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ discussion_id: discussionId, conversation }),
+      });
+      const data = await response.json();
+      setAnalysis(data.analysis);
+    } catch (error) {
+      console.error('Error ending discussion:', error);
+    }
+  };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <div className="bg-gray-50 shadow-lg rounded-lg p-8">
-        <h2 className="text-3xl font-bold mb-6 text-center text-indigo-600">Voice-Enabled Group Discussion</h2>
+    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 p-8">
+      <div className="max-w-3xl mx-auto bg-white shadow-2xl rounded-xl p-10">
+        <h2 className="text-3xl font-extrabold mb-8 text-center text-blue-600">🎤 Group Discussion Assistant</h2>
         {!discussionId ? (
-          <div className="space-y-6">
+          <div className="space-y-8">
             <input
               type="text"
-              placeholder="Enter discussion topic..."
+              placeholder="Enter a topic for discussion..."
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-4 focus:ring-blue-400"
             />
             <button
               onClick={startDiscussion}
               disabled={!topic}
-              className="w-full bg-indigo-600 text-white py-3 px-5 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200"
+              className="w-full bg-blue-600 text-white py-3 px-6 rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition duration-300"
             >
               Start Discussion
             </button>
           </div>
         ) : (
           <div className="space-y-6">
-            <div className="h-80 overflow-y-auto border border-gray-200 rounded-lg p-4 bg-white shadow-inner">
+            <div className="h-80 overflow-y-auto border border-gray-200 rounded-md p-4 bg-gray-50 shadow-inner">
               {conversation.map((message, index) => (
                 <div key={index} className="mb-3">
                   <span className="block text-gray-800">{message}</span>
                 </div>
               ))}
               {currentSpeaker && (
-                <div className="font-semibold text-indigo-600">
+                <div className="mt-4 font-semibold text-blue-600">
                   Currently speaking: {currentSpeaker}
                 </div>
               )}
@@ -301,21 +315,33 @@ const GroupDiscussion: React.FC = () => {
             <div className="flex justify-center space-x-4">
               <button
                 onClick={isListening ? stopListening : startListening}
-                className={`py-3 px-6 rounded-lg focus:outline-none focus:ring-4 transition duration-200 ${
+                className={`py-3 px-6 rounded-md shadow-md focus:outline-none focus:ring-4 transition duration-300 ${
                   isListening
-                    ? 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500'
-                    : 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500'
+                    ? 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-400'
+                    : 'bg-green-500 text-white hover:bg-green-600 focus:ring-green-400'
                 }`}
               >
                 {isListening ? 'Stop Listening' : 'Start Listening'}
               </button>
               <button
                 onClick={startDiscussion}
-                className="py-3 px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500 transition duration-200"
+                className="py-3 px-6 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-400 transition duration-300"
               >
                 Restart Discussion
               </button>
+              <button
+                onClick={endDiscussion}
+                className="py-3 px-6 bg-yellow-500 text-white rounded-md shadow-md hover:bg-yellow-600 focus:outline-none focus:ring-4 focus:ring-yellow-400 transition duration-300"
+              >
+                End Discussion
+              </button>
             </div>
+            {analysis && (
+              <div className="mt-6 p-6 bg-gray-100 border border-gray-300 rounded-md shadow">
+                <h3 className="text-xl font-semibold mb-3">📝 Discussion Analysis:</h3>
+                <p className="text-gray-700">{analysis}</p>
+              </div>
+            )}
           </div>
         )}
       </div>

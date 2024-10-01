@@ -1,0 +1,332 @@
+[
+    {
+        "id": 1,
+        "question": "What is the time complexity of binary search?",
+        "options": [
+            "O(n)",
+            "O(log n)",
+            "O(n^2)",
+            "O(1)"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "id": 2,
+        "question": "Which data structure is used for BFS traversal?",
+        "options": [
+            "Stack",
+            "Queue",
+            "Heap",
+            "Graph"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "id": 3,
+        "question": "What is the space complexity of merge sort?",
+        "options": [
+            "O(1)",
+            "O(log n)",
+            "O(n)",
+            "O(n log n)"
+        ],
+        "correctAnswer": 2
+    },
+    {
+        "id": 4,
+        "question": "Which of the following is not a stable sorting algorithm?",
+        "options": [
+            "Merge Sort",
+            "Quick Sort",
+            "Bubble Sort",
+            "Insertion Sort"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "id": 5,
+        "question": "In a min-heap, for a node at index i, where is its parent located?",
+        "options": [
+            "i/2",
+            "(i-1)/2",
+            "i*2",
+            "i-2"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "id": 6,
+        "question": "What is the best-case time complexity of Quick Sort?",
+        "options": [
+            "O(n)",
+            "O(n log n)",
+            "O(n^2)",
+            "O(log n)"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "id": 7,
+        "question": "What is a self-balancing binary search tree?",
+        "options": [
+            "Heap",
+            "Trie",
+            "AVL Tree",
+            "Graph"
+        ],
+        "correctAnswer": 2
+    },
+    {
+        "id": 8,
+        "question": "Which graph traversal algorithm uses a stack?",
+        "options": [
+            "BFS",
+            "DFS",
+            "Dijkstra",
+            "A*"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "id": 9,
+        "question": "What is the time complexity of inserting a node in an AVL tree?",
+        "options": [
+            "O(log n)",
+            "O(n log n)",
+            "O(n)",
+            "O(1)"
+        ],
+        "correctAnswer": 0
+    },
+    {
+        "id": 10,
+        "question": "Which data structure is used in the implementation of recursion?",
+        "options": [
+            "Queue",
+            "Stack",
+            "Heap",
+            "Tree"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "id": 11,
+        "question": "Which sorting algorithm is best suited for nearly sorted arrays?",
+        "options": [
+            "Bubble Sort",
+            "Insertion Sort",
+            "Selection Sort",
+            "Merge Sort"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "id": 12,
+        "question": "Which algorithm is used to find the shortest path in an unweighted graph?",
+        "options": [
+            "Dijkstra",
+            "Floyd-Warshall",
+            "Bellman-Ford",
+            "BFS"
+        ],
+        "correctAnswer": 3
+    },
+    {
+        "id": 13,
+        "question": "Which of the following data structures allows duplicate elements?",
+        "options": [
+            "Set",
+            "Stack",
+            "Queue",
+            "Priority Queue"
+        ],
+        "correctAnswer": 2
+    },
+    {
+        "id": 14,
+        "question": "What is the height of a complete binary tree with N nodes?",
+        "options": [
+            "log N",
+            "N",
+            "N log N",
+            "N^2"
+        ],
+        "correctAnswer": 0
+    },
+    {
+        "id": 15,
+        "question": "In a binary search tree, which traversal gives the nodes in non-decreasing order?",
+        "options": [
+            "Preorder",
+            "Postorder",
+            "Inorder",
+            "Level order"
+        ],
+        "correctAnswer": 2
+    },
+    {
+        "id": 16,
+        "question": "Which of the following algorithms is not used for pathfinding?",
+        "options": [
+            "A*",
+            "Dijkstra",
+            "DFS",
+            "Prim's"
+        ],
+        "correctAnswer": 3
+    },
+    {
+        "id": 17,
+        "question": "Which of the following sorting algorithms is not comparison-based?",
+        "options": [
+            "Merge Sort",
+            "Quick Sort",
+            "Bubble Sort",
+            "Radix Sort"
+        ],
+        "correctAnswer": 3
+    },
+    {
+        "id": 18,
+        "question": "What is the maximum number of edges in a simple graph with n vertices?",
+        "options": [
+            "n",
+            "n^2",
+            "n(n-1)/2",
+            "n(n+1)/2"
+        ],
+        "correctAnswer": 2
+    },
+    {
+        "id": 19,
+        "question": "Which of the following algorithms is used for minimum spanning tree?",
+        "options": [
+            "Kruskal",
+            "Dijkstra",
+            "A*",
+            "Floyd-Warshall"
+        ],
+        "correctAnswer": 0
+    },
+    {
+        "id": 20,
+        "question": "Which of the following is not an application of dynamic programming?",
+        "options": [
+            "Fibonacci sequence",
+            "Longest common subsequence",
+            "Binary search",
+            "Knapsack problem"
+        ],
+        "correctAnswer": 2
+    },
+    {
+        "id": 21,
+        "question": "What is the time complexity of heapify in a binary heap?",
+        "options": [
+            "O(1)",
+            "O(log n)",
+            "O(n)",
+            "O(n log n)"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "id": 22,
+        "question": "Which data structure is most suitable for implementing LRU cache?",
+        "options": [
+            "Array",
+            "Linked List",
+            "Queue",
+            "Hash Map with Doubly Linked List"
+        ],
+        "correctAnswer": 3
+    },
+    {
+        "id": 23,
+        "question": "Which of the following algorithms is used to detect cycles in a graph?",
+        "options": [
+            "DFS",
+            "BFS",
+            "Kruskal",
+            "Floyd-Warshall"
+        ],
+        "correctAnswer": 0
+    },
+    {
+        "id": 24,
+        "question": "Which of the following is a self-balancing binary search tree?",
+        "options": [
+            "Binary Heap",
+            "B-Tree",
+            "Red-Black Tree",
+            "Hash Table"
+        ],
+        "correctAnswer": 2
+    },
+    {
+        "id": 25,
+        "question": "Which sorting algorithm is used in Timsort?",
+        "options": [
+            "Merge Sort",
+            "Quick Sort",
+            "Insertion Sort",
+            "Both A and C"
+        ],
+        "correctAnswer": 3
+    },
+    {
+        "id": 26,
+        "question": "Which of the following problems can be solved using a greedy algorithm?",
+        "options": [
+            "0/1 Knapsack",
+            "Travelling Salesman",
+            "Prim's Algorithm",
+            "Subset Sum"
+        ],
+        "correctAnswer": 2
+    },
+    {
+        "id": 27,
+        "question": "Which of the following data structures is not linear?",
+        "options": [
+            "Array",
+            "Tree",
+            "Queue",
+            "Linked List"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "id": 28,
+        "question": "Which of the following is true for a full binary tree?",
+        "options": [
+            "Every node has 2 children",
+            "All leaves are at the same level",
+            "Every node has 0 or 2 children",
+            "All internal nodes have 1 child"
+        ],
+        "correctAnswer": 2
+    },
+    {
+        "id": 29,
+        "question": "What is the best-case time complexity of selection sort?",
+        "options": [
+            "O(n)",
+            "O(n log n)",
+            "O(n^2)",
+            "O(log n)"
+        ],
+        "correctAnswer": 2
+    },
+    {
+        "id": 30,
+        "question": "What is the time complexity of adding an element to a heap?",
+        "options": [
+            "O(1)",
+            "O(n)",
+            "O(log n)",
+            "O(n log n)"
+        ],
+        "correctAnswer": 2
+    }
+]

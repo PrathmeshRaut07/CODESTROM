@@ -10,7 +10,8 @@ import DSA from './components/DSA'; // Import DSA component
 import CodeEditor from './components/CodeEditor'; // Import CodeEditor component
 import GroupDiscussion from './components/GroupDiscussion';
 import Aptitude from './components/Aptitude';
-
+import Resume from './components/Resume';
+import Roadmap from './components/roadmap';
 
 function App() {
     return (
@@ -25,7 +26,8 @@ function App() {
                 <Route path="/code-editor" element={<CodeEditor />} /> {/* Add CodeEditor route */}
                 <Route path="/gd" element={<GroupDiscussion />} />
                 <Route path="/aptitude" element={<Aptitude/>} />
-                
+                <Route path="/resume" element={<Resume/>} />
+                <Route path="/roadmap" element={<Roadmap/>} />
             </Routes>
         </Router>
     )
